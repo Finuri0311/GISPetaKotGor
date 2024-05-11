@@ -18,7 +18,7 @@ const MapView = ({geojsonData}) =>{
 
                 />
                 <GeoJSON 
-                    data={geojsonData.features[0]}
+                    data={geojsonData.features}
                 />
             </MapContainer>
 
