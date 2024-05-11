@@ -1,10 +1,13 @@
 import React from "react";
 
+import MapView from "../components/maps/MapView";
+import geojsonData from "../datas/statics/map-data.json";
+
 const Map = () => {
     return (
-        <>
-            Map page
-        </>
+        <div className="map">
+            <MapView geojsonData={geojsonData}/>
+        </div>
     )
 }
 
