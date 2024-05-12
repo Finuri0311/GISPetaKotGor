@@ -5,8 +5,8 @@ const Tabular = () => {
   return (
     <>
       {/* <PieChart /> */}
-      {/* <Table />
-            <h1>Tabular page</h1> */}
+      <Table />
+      <h1>Tabular page</h1>
     </>
   );
 };
