@@ -1,11 +1,13 @@
 import React from "react";
-import LeafetMap from "../components/LeafletMap";
+
+import MapView from "../components/maps/MapView";
+import geojsonData from "../datas/statics/map-data.json";
 
 const Map = () => {
   return (
-    <>
-      <LeafetMap />
-    </>
+    <div className="map">
+      <MapView geojsonData={geojsonData} />
+    </div>
   );
 };
 
