@@ -4,6 +4,7 @@ import dataLayers from "../../datas/statics/data-layer.json";
 import "leaflet/dist/leaflet.css";
 import L, { map } from "leaflet";
 
+
 const MapView = ({ geojsonData }) => {
   return (
     <div className="mapContainer">
