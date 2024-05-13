@@ -24,7 +24,6 @@ const MapView = ({ geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine })
               />
             )}
           </LayersControl.Overlay>
-
           <LayersControl.Overlay name="Area Sawah Kota Gorontalo">
             {geoSawahArea && (
               <GeoJSON
@@ -36,7 +35,17 @@ const MapView = ({ geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine })
               />
             )}
           </LayersControl.Overlay>
-
+          <LayersControl.Overlay name="Area Sawah Kota Gorontalo">
+            {geoSawahArea && (
+              <GeoJSON
+                data={geoSawahArea.features}
+                style={{
+                  color: "green",
+                  fillColor: "lightgreen",
+                }}
+              />
+            )}
+          </LayersControl.Overlay>
           <LayersControl.Overlay name="Batas Administrasi Kota Gorontalo">
             {geoAdminsArea && (
               <GeoJSON
