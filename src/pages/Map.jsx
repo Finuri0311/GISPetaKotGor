@@ -7,6 +7,7 @@ import geoIrigasiLine from "../datas/statics/geo-irigasi-kotgor.json";
 import geoAgriSawahArea from "../datas/statics/geo-agrisawah-kotgor.json";
 import geoAdminsLineKotGor from "../datas/statics/geo-admins-line-kotgor.json";
 import geoAdminsAreaKotGor from "../datas/statics/geo-admins-area-kotgor.json";
+import geoSawahKotGor from "../datas/statics/geo-sawah-kotgor.json";
 
 
 const Map = () => {
@@ -14,7 +15,7 @@ const Map = () => {
         <div className="map">
             <Navbar />
             <MapView 
-                geoSawahArea={geoAgriSawahArea}
+                geoSawahArea={geoSawahKotGor}
                 geoIrigasiLine={geoIrigasiLine}
                 geoAdminsArea={geoAdminsAreaKotGor}
                 geoAdminsLine={geoAdminsLineKotGor}
