@@ -1,6 +1,5 @@
-import React from "react";
-
-import { MapContainer, TileLayer, GeoJSON} from "react-leaflet";
+import React, { useState } from "react";
+import { MapContainer, TileLayer, GeoJSON, LayersControl } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 // import L from "leaflet";
 
@@ -12,62 +11,67 @@ const MapView = ({geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine}) =
                 zoom={13}
                 style={{height: "100vh"}}
             >
-                <TileLayer 
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution="&copy; <a href='https://www.openstreetmap.org/copyrigth'>OpenStreetMap</a> Contributors"
-
-                />
-
-                {
-                    geoIrigasiLine && (
-                        <GeoJSON 
-                            data={geoIrigasiLine.features}
-                            style={
-                                {
-                                    color: "blue"
+            <LayersControl position="topright">
+                {dataLayers.map((layer) => (
+                    <LayersControl.BaseLayer key={layer.name} checked={layer.name === "OpenStreetMap"} name={layer.name}>
+                    <TileLayer url={layer.url} attribution={layer.attribution} />
+                    </LayersControl.BaseLayer>
+                ))}
+                <LayersControl.Overlay name="Jaringan Irigasi Lomaya Alale Pilohayanga">
+                    {
+                        geoIrigasiLine && (
+                            <GeoJSON 
+                                data={geoIrigasiLine.features}
+                                style={
+                                    {
+                                        color: "blue"
+                                    }
                                 }
-                            }
-                        />
-                    )
-                }
+                            />
+                        )
+                    }
 
-                { geoSawahArea && (
-                        <GeoJSON 
-                            data={geoSawahArea.features}
-                            style={
-                                {
-                                    color: "green",
-                                    fillColor: "lightgreen"
+                    { geoSawahArea && (
+                            <GeoJSON 
+                                data={geoSawahArea.features}
+                                style={
+                                    {
+                                        color: "green",
+                                        fillColor: "lightgreen"
+                                    }
                                 }
-                            }
-                        />
-                    )
-                }
+                            />
+                        )
+                    }
 
-                { geoAdminsArea && (
-                        <GeoJSON 
-                            data={geoAdminsArea.features}
-                            style={
-                                {
-                                    color: "red",
-                                    fillColor: "pink"
+                    { geoAdminsArea && (
+                            <GeoJSON 
+                                data={geoAdminsArea.features}
+                                style={
+                                    {
+                                        color: "red",
+                                        fillColor: "pink"
+                                    }
                                 }
-                            }
-                        />
-                    )
-                }
+                            />
+                        )
+                    }
 
-                { geoAdminsLine && (
-                        <GeoJSON 
-                            data={geoAdminsLine.features}
-                            style={
-                                {
-                                    color: "orange",
+                    { geoAdminsLine && (
+                            <GeoJSON 
+                                data={geoAdminsLine.features}
+                                style={
+                                    {
+                                        color: "orange",
+                                    }
                                 }
-                            }
-                        />
-                    )
-                }
+                            />
+                        )
+                    }
+                </LayersControl.Overlay>
+            </LayersControl>
+
+
 
 
             </MapContainer>
