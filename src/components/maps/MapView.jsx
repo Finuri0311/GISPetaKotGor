@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MapContainer, TileLayer, GeoJSON, LayersControl } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 // import L from "leaflet";
+import dataLayers from "../../datas/statics/data-layer.json";
 
 const MapView = ({geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine}) =>{
     return (
@@ -14,7 +15,7 @@ const MapView = ({geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine}) =
             <LayersControl position="topright">
                 {dataLayers.map((layer) => (
                     <LayersControl.BaseLayer key={layer.name} checked={layer.name === "OpenStreetMap"} name={layer.name}>
-                    <TileLayer url={layer.url} attribution={layer.attribution} />
+                        <TileLayer url={layer.url} attribution={layer.attribution} />
                     </LayersControl.BaseLayer>
                 ))}
                 <LayersControl.Overlay name="Jaringan Irigasi Lomaya Alale Pilohayanga">
@@ -30,7 +31,9 @@ const MapView = ({geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine}) =
                             />
                         )
                     }
-
+                </LayersControl.Overlay>
+                
+                <LayersControl.Overlay name="Area Sawah Kota Gorontalo">
                     { geoSawahArea && (
                             <GeoJSON 
                                 data={geoSawahArea.features}
@@ -43,7 +46,9 @@ const MapView = ({geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine}) =
                             />
                         )
                     }
+                </LayersControl.Overlay>
 
+                <LayersControl.Overlay name="Batas Administrasi Kota Gorontalo">
                     { geoAdminsArea && (
                             <GeoJSON 
                                 data={geoAdminsArea.features}
@@ -57,7 +62,7 @@ const MapView = ({geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine}) =
                         )
                     }
 
-                    { geoAdminsLine && (
+                    {/* { geoAdminsLine && (
                             <GeoJSON 
                                 data={geoAdminsLine.features}
                                 style={
@@ -67,12 +72,12 @@ const MapView = ({geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine}) =
                                 }
                             />
                         )
-                    }
+                    } */}
                 </LayersControl.Overlay>
+
+
+
             </LayersControl>
-
-
-
 
             </MapContainer>
 
