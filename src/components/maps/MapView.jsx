@@ -2,9 +2,9 @@ import React from "react";
 
 import { MapContainer, TileLayer, GeoJSON} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L, { map } from "leaflet";
+// import L from "leaflet";
 
-const MapView = ({geojsonData}) =>{
+const MapView = ({geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine}) =>{
     return (
         <div className="mapContainer">
             <MapContainer 
@@ -17,9 +17,59 @@ const MapView = ({geojsonData}) =>{
                     attribution="&copy; <a href='https://www.openstreetmap.org/copyrigth'>OpenStreetMap</a> Contributors"
 
                 />
-                <GeoJSON 
-                    data={geojsonData.features}
-                />
+
+                {
+                    geoIrigasiLine && (
+                        <GeoJSON 
+                            data={geoIrigasiLine.features}
+                            style={
+                                {
+                                    color: "blue"
+                                }
+                            }
+                        />
+                    )
+                }
+
+                { geoSawahArea && (
+                        <GeoJSON 
+                            data={geoSawahArea.features}
+                            style={
+                                {
+                                    color: "green",
+                                    fillColor: "lightgreen"
+                                }
+                            }
+                        />
+                    )
+                }
+
+                { geoAdminsArea && (
+                        <GeoJSON 
+                            data={geoAdminsArea.features}
+                            style={
+                                {
+                                    color: "red",
+                                    fillColor: "pink"
+                                }
+                            }
+                        />
+                    )
+                }
+
+                { geoAdminsLine && (
+                        <GeoJSON 
+                            data={geoAdminsLine.features}
+                            style={
+                                {
+                                    color: "orange",
+                                }
+                            }
+                        />
+                    )
+                }
+
+
             </MapContainer>
 
         </div>
