@@ -18,6 +18,7 @@ const MapView = ({geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine}) =
                         <TileLayer url={layer.url} attribution={layer.attribution} />
                     </LayersControl.BaseLayer>
                 ))}
+
                 <LayersControl.Overlay name="Jaringan Irigasi Lomaya Alale Pilohayanga">
                     {
                         geoIrigasiLine && (
