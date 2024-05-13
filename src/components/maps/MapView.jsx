@@ -8,7 +8,7 @@ const MapView = ({geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine}) =
     return (
         <div className="mapContainer">
             <MapContainer 
-                center={[0.5605645791559364, 123.05812205598738]}
+                center={[0.5205645791559364, 123.05812205598738]}
                 zoom={13}
                 style={{height: "100vh"}}
             >
