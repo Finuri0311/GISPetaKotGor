@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Table from "../components/Table";
+import { Link } from "react-router-dom";
 
-//========================================
-import sawah1 from "../assets/images/Sawah-kotgor.jpeg"
-import sawah2 from "../assets/images/Sawah-kotgor2.jpg"
-import sawah3 from "../assets/images/Sawah-kotgor3.jpeg"
-const images = [
-    {url: sawah1},
-    {url: sawah2},
-    {url: sawah3},
-]
-//=======================================
+import Table from "../components/Table";
+import { IoArrowBackCircle } from "react-icons/io5";
+
+import {images} from "../assets/images/images";
 
 
 const Tabular = () => {
@@ -30,7 +24,6 @@ const Tabular = () => {
 
   return (
     <>
-
       <div 
       className="bg duration-500" 
       style={{
@@ -50,6 +43,14 @@ const Tabular = () => {
           transitionDuration: "1s",
       }}
       ></div>
+      <div className="back relative z-10 mx-10 pt-10">
+          <div className="button">
+            <Link to={"/"} className="flex align-middle justify-center py-1 rounded outline-none bg-gray-800 w-[120px]">
+              <IoArrowBackCircle size={38} color="slate"/>
+              <span className="inline-flex items-center px-1">Kembali</span>
+            </Link>
+          </div>
+      </div>
       <Table />
     </>
   );

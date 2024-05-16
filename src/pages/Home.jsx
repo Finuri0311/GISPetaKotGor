@@ -8,18 +8,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 
-//========================================
-import sawah1 from "../assets/images/Sawah-kotgor.jpeg"
-import sawah2 from "../assets/images/Sawah-kotgor2.jpg"
-import sawah3 from "../assets/images/Sawah-kotgor3.jpeg"
-const images = [
-    {url: sawah1},
-    {url: sawah2},
-    {url: sawah3},
-]
-//=======================================
-
-
+import {images} from "../assets/images/images";
 
 
 const Home = () =>{

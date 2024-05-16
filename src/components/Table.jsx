@@ -50,7 +50,7 @@ const Table = () => {
 
         <div className="relative z-10 overflow-x-auto">
 
-            <div className="header my-10">
+            <div className="header pt-14 mb-10">
                 <h1>Tabulasi Lahan Pertanian Kota Gorontalo</h1>
                 <h2 className="text-xl">Data Luas Lahan Pertanian Kota Gorontalo</h2>
             </div>

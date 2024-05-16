@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, GeoJSON, LayersControl } from "react-leaflet";
+import { MapContainer, TileLayer, GeoJSON, LayersControl, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 // import L from "leaflet";
 import dataLayers from "../../datas/statics/data-layer.json";
@@ -35,7 +35,7 @@ const MapView = ({ geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine })
               />
             )}
           </LayersControl.Overlay>
-          <LayersControl.Overlay name="Area Sawah Kota Gorontalo">
+          {/* <LayersControl.Overlay name="Area Sawah Kota Gorontalo">
             {geoSawahArea && (
               <GeoJSON
                 data={geoSawahArea.features}
@@ -45,7 +45,7 @@ const MapView = ({ geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine })
                 }}
               />
             )}
-          </LayersControl.Overlay>
+          </LayersControl.Overlay> */}
           <LayersControl.Overlay name="Batas Administrasi Kota Gorontalo">
             {geoAdminsArea && (
               <GeoJSON
