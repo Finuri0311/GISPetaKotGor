@@ -1,94 +1,129 @@
-import { useState } from "react";
-// import Search from "./TableSearch";
-import mapData from "../datas/statics/map-data.json";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import * as XLSX from 'xlsx';
+import tabulasiSawah from "../datas/map/mygeodata/DATA_TABULASI_SAWAH.json";
+import { FaSearch } from "react-icons/fa";
 
-const features = mapData.features;
-
-const featureElements = [];
-for (let i = 0; i < features.length; i++) {
-  const feature = features[i];
-  // Tambahkan elemen JSX untuk setiap fitur
-  //   featureElements.push(feature);
-  //   featureElements = feature.properties;
-  featureElements.push(feature.properties);
-}
-
-const tableData = featureElements;
-
-// const tableData = [
-//   { name: "fulan", nim: "01" },
-//   { name: "fulani", nim: "02" },
-//   { name: "fulana", nim: "03" },
-//   { name: "fulano", nim: "04" },
-//   { name: "fulane", nim: "05" },
-// ];
-
-const Data = ({ array }) => {
-  return (
-    <>
-      {array ? (
-        array.map((data, i) => {
-          return (
-            <tr key={i}>
-              <td>{i + 1}</td>
-              {Object.keys(data).map((key, idx) => (
-                <td key={idx}>{data[key]}</td>
-              ))}
-            </tr>
-          );
-        })
-      ) : (
-        <tr>Data Kosong</tr>
-      )}
-    </>
-  );
-};
 
 const Table = () => {
-  const [search, setSearch] = useState();
-  const [filter, setFilter] = useState();
+    const [word, setWord] = useState();
+    const search = useRef();
 
-  const searchData = () => {
-    let value = search;
-    setFilter(value ? tableData.filter((e) => e.name.toLowerCase().includes(value.toLowerCase())) : tableData);
-  };
+    const tabulasi = useMemo(() => {
+        let data = [];
 
-  return (
-    <>
-      <div className="search-table bg-white inline-flex p-0 m-0">
-        <input
-          type="text"
-          name="search"
-          id="search-data"
-          className="text-black"
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
-        <button
-          className="bg-slate-400 text-black p-1 m-0"
-          onClick={() => {
-            searchData();
-          }}
-        >
-          Search
-        </button>
-      </div>
-      <table className="w-full bg-slate-100 my-5 p-5">
-        <thead className="border-b border-slate-400 text-slate-700">
-          <tr>
-            <th>Nom</th>
-            {Object.keys(tableData[0]).map((key, i) => (
-              <th key={i}>{key.toUpperCase()}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="text-slate-800">
-          <Data array={filter ? filter : tableData} />
-        </tbody>
-      </table>
-    </>
-  );
-};
+        if (word) {
+            // tabulasiSawah.map(e=>{
+            //     if(e["Row Labels"].toLocaleLowerCase() == (word.toLocaleLowerCase())){
+            //         data.push({"Daerah": e["Row Labels"], "Luas": e["Sum of LUASHA"]})
+            //     }
+            // })        
+            // console.log(data);
+            tabulasiSawah.forEach(e => {
+                if (e["Row Labels"] != "Kawasan Pertanian" && e["Row Labels"].toLocaleLowerCase().includes(word.toLocaleLowerCase())) data.push({ "Daerah": e["Row Labels"], "Luas": e["Sum of LUASHA"] });
+                else {
+                    data.push({ "Daerah": "", "Luas": "" });
+                }
+            });
+
+        } else {
+            tabulasiSawah.forEach(e => {
+                if (e["Row Labels"] != "Kawasan Pertanian") data.push({ "Daerah": e["Row Labels"], "Luas": e["Sum of LUASHA"] });
+            });
+        }
+
+        data.map(e => {
+            data.filter(e => {
+                return e.Daerah != "";
+            })
+        })
+        return data;
+    }, [word]);
+
+
+
+    function wordHandler(e) {
+        e.preventDefault();
+        setWord(document.getElementById("search-input").value)
+    }
+
+    return (
+
+        <div className="relative z-10 overflow-x-auto">
+
+            <div className="header my-10">
+                <h1>Tabulasi Lahan Pertanian Kota Gorontalo</h1>
+                <h2 className="text-xl">Data Luas Lahan Pertanian Kota Gorontalo</h2>
+            </div>
+
+            <div className="search-container flex justify-end xl:mr-[190px] mr-[100px]">
+                <div className="search flex">
+                    <form
+                        className="flex"
+                    >
+                        <input
+                            placeholder="Cari Nama Daerah"
+                            ref={search}
+                            type="text" name="search-input" id="search-input" className="pl-4 pr-1 py-2 bg-slate-900 text-white focus:outline-none rounded-bl rounded-tl  w-[260px]" />
+                        <button id="submit" name="search-input" type="submit" className="outline-none bg-slate-900 rounded-tr rounded-br px-2"
+                            onClick={wordHandler}>
+                            <FaSearch 
+                            />
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+            <div className="table-container flex justify-center ">
+                <div className="table-rounded w-[80%] rounded-lg  border-2 border-gray-900 mt-2 ">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+                        <thead className="text-m text-gray-900 uppercase bg-gray-50 dark:bg-gray-900 dark:text-slate-400 ">
+                            <tr className="">
+                                <th className="px-4 py-2 ">Daerah</th>
+                                <th className="px-4 py-2 ">Luas (Ha)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {tabulasi && tabulasi.map((e, i) => {
+                                if (e.Daerah != "Grand Total") {
+                                    if (e.Daerah != "") {
+                                        return (
+                                            <tr key={i} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td className="px-4 py-2">
+                                                    {e.Daerah}
+                                                </td>
+                                                <td className="px-4 py-2">
+                                                    {e.Luas}
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+
+                                } else {
+                                    return;
+                                }
+                            }
+                            )
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            {
+                                (tabulasi) && (
+                                    <tr className="font-semibold text-m text-gray-900 dark:text-gray-400 bg-slate-900">
+                                        <td scope="row" className="text-base px-4 py-2">{tabulasi[tabulasi.length - 1].Daerah}</td>
+                                        <td className="px-4 py-2">{tabulasi[tabulasi.length - 1].Luas}</td>
+                                    </tr>
+                                )
+                            }
+
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    );
+}
 
 export default Table;
