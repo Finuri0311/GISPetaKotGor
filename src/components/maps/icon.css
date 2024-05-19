@@ -1,0 +1,26 @@
+.icon-table {
+  background-image: url("/public/styles/table-icon-24173.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* Adjust size as needed */
+  width: 24px; /* Adjust width as needed */
+  height: 24px; /* Adjust height as needed */
+  padding-bottom: 3px;
+}
+
+.icon-home {
+  background-image: url("/public/styles/homepage-icon-png-2574.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* Adjust size as needed */
+  width: 24px; /* Adjust width as needed */
+  height: 24px; /* Adjust height as needed */
+  padding-bottom: 3px;
+}
+
+.custom-navigation-button {
+  background-color: #ffffff; /* Set background color to white */
+  /* color: #000000; Set text color to black
+  border: 1px solid #000000; Set border style */
+  padding: 3px; /* Set padding to center the icon */
+}

@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import { MapContainer, TileLayer, GeoJSON, LayersControl, Tooltip } from "react-leaflet";
+import React, { useEffect } from "react";
+import { MapContainer, TileLayer, GeoJSON, LayersControl, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-// import L from "leaflet";
+import CustomInfoButton from "./CustomInfoButton";
+import L from "leaflet";
 import dataLayers from "../../datas/statics/data-layer.json";
 
 const MapView = ({ geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine }) => {
   return (
     <div className="mapContainer">
       <MapContainer center={[0.5205645791559364, 123.05812205598738]} zoom={13} style={{ height: "100vh" }}>
+        <CustomInfoButton iconClass={"icon-table"} URL={"/data"} titleButton={"Data Tabular"} />
+        <CustomInfoButton iconClass={"icon-home"} URL={"/"} titleButton={"Home"} />
         <LayersControl position="topright">
           {dataLayers.map((layer) => (
             <LayersControl.BaseLayer key={layer.name} checked={layer.name === "OpenStreetMap"} name={layer.name}>
