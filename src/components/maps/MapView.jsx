@@ -8,7 +8,7 @@ import dataLayers from "../../datas/statics/data-layer.json";
 const MapView = ({ geoIrigasiLine, geoSawahArea, geoAdminsArea, geoAdminsLine }) => {
   return (
     <div className="mapContainer">
-      <MapContainer center={[0.5205645791559364, 123.05812205598738]} zoom={13} style={{ height: "100vh" }}>
+      <MapContainer center={[0.5205645791559364, 123.05812205598738]} minZoom={13} zoom={13} style={{ height: "100vh" }}>
         <CustomInfoButton iconClass={"icon-table"} URL={"/data"} titleButton={"Data Tabular"} />
         <CustomInfoButton iconClass={"icon-home"} URL={"/"} titleButton={"Home"} />
         <LayersControl position="topright">
